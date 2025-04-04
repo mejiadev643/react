@@ -1,13 +1,18 @@
-import {Home} from '../views/Home.jsx'
-import {About} from '../views/About.jsx'
+import Home from '../views/Home.jsx'
+import About from '../views/About.jsx'
+import Search from '../views/Search.jsx'
 export const routes = [
     {
         path: '/',
-        component: Home,
+        Component: Home,
     },
     {
         path: '/about',
-        component: About,
+        Component: About,
     },
+    {
+        path: '/search/:search',
+        Component: Search,
+    }
     // Puedes agregar más rutas aquí
 ]

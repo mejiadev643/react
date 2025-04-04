@@ -1,5 +1,5 @@
 import {Link} from '../utils/Link'
-export function Home() {
+export default function Home() {
     return (
       <div>
         <h1>Home</h1>

@@ -5,7 +5,6 @@ function NotFound(){ return <h1>404 - Not Found</h1>}
 
 import { Router } from './Router'
 import { routes } from './router/routes'
-import { Link } from './utils/Link'
 
 function App() {
 

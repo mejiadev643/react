@@ -1,6 +1,6 @@
 import { Link } from "../utils/Link"
 
-export function About() {
+export default function About() {
     return (
         <div>
             <h1>About</h1>
@@ -8,6 +8,8 @@ export function About() {
             <img src="https://dummyjson.com/image/150" alt="Placeholder" />
             <p>Here is some information about us.</p>
             <Link to="/">Go to Home</Link>
+            <br />
+            <Link to="/search/some">Go to Search</Link>
         </div>
     )
 }
