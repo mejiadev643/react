@@ -1,10 +1,17 @@
+import { lazy, Suspense } from 'react'
+
 import './App.css'
 
-function NotFound(){ return <h1>404 - Not Found</h1>}
-
+function NotFound() { return <h1>404 - Not Found</h1> }
 
 import { Router } from './Router'
 import { routes } from './router/routes'
+import { Route } from './router/route'
+// import Home from './views/Home'
+// import About from './views/About'
+//importar home y about lazy
+const Home = lazy(() => import('./views/Home'))
+const About = lazy(() => import('./views/About'))
 
 function App() {
 
@@ -13,15 +20,13 @@ function App() {
     <>
       <div className="App">
         <h1>SPA Router</h1>
-        <Router routes={routes} defaultComponent={NotFound} />
-        {/* <p>Click the links to navigate:</p>
-        <ul>
-          {routes.map((route, index) => (
-            <li key={index}>
-              <Link to={route.path}>{route.path}</Link>
-            </li>
-          ))}
-        </ul> */}
+        <Suspense fallback={<div>Loading...</div>}>
+          <Router routes={routes} defaultComponent={NotFound} >
+            <Route path="/" Component={Home} />
+            <Route path="/about" Component={About} />
+          </Router>
+        </Suspense>
+
         <p>Try refreshing the page to see that the state is preserved.</p>
       </div>
     </>
