@@ -1,11 +1,13 @@
 import React from "react";
 import { login } from "../services/authService.ts";
-import { removeToken, removeUser, setToken, setUser } from "../utils/token";
+// import { removeToken, removeUser, setToken, setUser } from "../utils/token";
 import { User, loginInterface } from "../interfaces/auth";
+import { useTokenStore } from "../store/auth.store";
 
 
 export const useLogin = () => {
     const [error, setError] = React.useState<boolean>(false);
+    const { setAccessToken, setUser } = useTokenStore();
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -19,15 +21,28 @@ export const useLogin = () => {
         }
         // Attempt to login
         try {
-            const response = await login({username, password} as loginInterface); // Call the login function from authService
+            const response = await login({ username, password } as loginInterface); // Call the login function from authService
 
             // Check if the response was successful
             if (response.ok) {
                 const data = await response.json(); // Parse the JSON response
-                removeToken(); // Remove any existing token
-                removeUser(); // Remove any existing user data
-                setToken(data.accessToken); // Store the token
-                const userData:User = {
+                // removeToken(); // Remove any existing token
+                // removeUser(); // Remove any existing user data
+                // setToken(data.accessToken); // Store the token
+                // const userData:User = {
+                //     email: data.email,
+                //     firstname: data.firstName,
+                //     gender: data.gender,
+                //     id: data.id,
+                //     image: data.image,
+                //     lastName: data.lastName,
+                //     username: data.username,
+                // }
+                // setUser(userData); // Store the user data
+
+                //use hook to set the token and user
+                setAccessToken(data.accessToken); // Store the token
+                const userData: User = {
                     email: data.email,
                     firstname: data.firstName,
                     gender: data.gender,
@@ -37,6 +52,7 @@ export const useLogin = () => {
                     username: data.username,
                 }
                 setUser(userData); // Store the user data
+
                 // Redirect to the dashboard or another page usin react-router-dom
                 window.location.href = '/dashboard'; // Redirect to the dashboard
 
