@@ -3,10 +3,11 @@ import { useTokenStore } from "../store/auth.store";
 
 export default function Dashboard() {
     // const user = getUser();
-    const { user } = useTokenStore();
+    const { user, clearStorage } = useTokenStore();
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('user');
+        clearStorage();
         window.location.href = '/login'; // Redirect to the login page
     };
     return (
